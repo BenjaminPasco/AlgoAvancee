@@ -10,7 +10,7 @@ public class Main {
 
         int n = Integer.parseInt(/*args[0]*/ "20");
 
-        new problemeDynamique(n);
+        new problemeDynamique(n) ;
 
         //System.out.println(points.toString()+"\n");
     }
