@@ -6,6 +6,8 @@ import java.awt.geom.Line2D;
  */
 public class EssaisSuccessifs {
 
+    final double MAX = 100000000;
+    private int n;
     private ArrayList<Point> points;    //la liste des points du polygone, generee au debut
     private ArrayList<Corde> cordes;    //la liste des cordes, remplie au cours de l'algorithme
 
@@ -14,30 +16,67 @@ public class EssaisSuccessifs {
      * @param n le nombre de sommets du polygone
      */
     public EssaisSuccessifs(int n){
+        this.n = n;
         this.points = ValtrAlgorithm.generateRandomConvexPolygon(n);
-        double result = triangularisationMinimale();
+        double result = triangulation(0, n-1);
         System.out.println(result);
     }
 
     /*
      * @return la triangularisation minimale
      */
-    public double triangularisationMinimale(){
-        return 0;
+    public double triangulation(int i, int j){
+
+        if(j < i+ 2) return 0;
+
+        //le resultat initial est suppose infini
+        double res = MAX;
+
+        for (int k = i; k < j; k++){
+            if(valideCorde(i, k)){
+                cordes.add(new Corde(this.points.get(i), this.points.get(k)));
+                res = Math.min(res, triangulation(i,k) + triangulation(k,j) + cordes.get(cordes.size()).getLongueur());
+            }
+        }
+        return res;
     }
 
     /*
-     * @return true si la corde testee est deja tracee ou si elle coupe une corde deja tracee
+     * @return false si la corde testee est deja tracee ou si elle coupe une corde deja tracee
      */
-    public boolean valideCorde(Point p1, Point p2){
-        boolean ret = false;
+    public boolean valideCorde(int i, int j){
+        boolean ret = true;
+
+        //si j < i, on inverse les valeurs
+        if (j < i){
+            int k = j;
+            j = i;
+            i = k;
+        }
+
+        //non valide si on a pris 2 points identiques
+        if (i == j) ret = false;
+
+        //non valide si on a pris 2 points consécutifs
+        if(j == i + 1 || (i == 0 && j == this.n - 1)) ret = false;
+
         for (Corde c : cordes){
-            if (c.getP1().equals(p1) && c.getP2().equals(p2)) ret = true;
-            if (c.getP1().equals(p2) && c.getP2().equals(p1)) ret = true;
-            if (ret = false)
-                ret = Line2D.linesIntersect(p1.getX(),p1.getY(),p2.getX(),p2.getY(),
-                        c.getP1().getX(),c.getP1().getY(),c.getP2().getX(),c.getP2().getY());
-            if (ret = true) break;
+            //non valide si la corde est déjà dans la liste
+            if (c.getP1().equals(points.get(i)) && c.getP2().equals(points.get(j))) ret = false;
+
+            //non valide si la corde coupe une autre corde de la liste
+            if (ret)
+                ret = !(Line2D.linesIntersect(
+                        points.get(i).getX(),
+                        points.get(i).getY(),
+                        points.get(j).getX(),
+                        points.get(j).getY(),
+
+                        c.getP1().getX(),
+                        c.getP1().getY(),
+                        c.getP2().getX(),
+                        c.getP2().getY()));
+            if (!ret) break;
         }
         return ret;
     }
