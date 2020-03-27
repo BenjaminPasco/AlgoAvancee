@@ -28,12 +28,12 @@ public class EssaisSuccessifs {
      */
     public double triangulation(int i, int j){
 
-        if(j < i+ 2) return 0;
+        if(j <= i+ 2) return 0;
 
         //le resultat initial est suppose infini
         double res = MAX;
 
-        for (int k = i; k < j; k++){
+        for (int k = i + 2; k < j; k++){
             if(valideCorde(i, k)){
                 Corde c = new Corde(this.points.get(i), this.points.get(k));
                 this.cordes.add(c);
