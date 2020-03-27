@@ -9,7 +9,7 @@ public class ValtrAlgorithm {
 
     private static final Random RAND = new Random();
 
-    public static ArrayList<Points> generateRandomConvexPolygon(int n) {
+    public static ArrayList<Point> generateRandomConvexPolygon(int n) {
         // Generate two lists of random X and Y coordinates
         List<Double> xPool = new ArrayList<>(n);
         List<Double> yPool = new ArrayList<>(n);
@@ -84,10 +84,10 @@ public class ValtrAlgorithm {
         double x = 0, y = 0;
         double minPolygonX = 0;
         double minPolygonY = 0;
-        ArrayList<Points> points = new ArrayList<>(n);
+        ArrayList<Point> points = new ArrayList<>(n);
 
         for (int i = 0; i < n; i++) {
-            points.add(new Points(x, y));
+            points.add(new Point(x, y));
 
             x += vec.get(i).getX();
             y += vec.get(i).getY();
@@ -101,8 +101,8 @@ public class ValtrAlgorithm {
         double yShift = minY - minPolygonY;
 
         for (int i = 0; i < n; i++) {
-            Points p = points.get(i);
-            points.set(i, new Points(p.x + xShift, p.y + yShift));
+            Point p = points.get(i);
+            points.set(i, new Point(p.x + xShift, p.y + yShift));
         }
 
         return points;

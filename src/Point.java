@@ -1,7 +1,7 @@
-public class Points {
+public class Point {
     Double x;
     Double y;
-     public Points(Double x, Double y){
+     public Point(Double x, Double y){
          this.x = x;
          this.y = y;
      }

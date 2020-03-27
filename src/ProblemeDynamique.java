@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.math.*;
 
 
-public class problemeDynamique {
+public class ProblemeDynamique {
 
     int n;
     public double[][] matriceProbleme;
-    public ArrayList<Points> points;
+    public ArrayList<Point> points;
     public double[][] distancesPoints;
 
-    public problemeDynamique(int n){
-        this.points = ValtrAlgorithm.generateRandomConvexPolygon( n );
+    public ProblemeDynamique(int n){
+        this.points = ValtrAlgorithm.generateRandomConvexPolygon(n);
         this.matriceProbleme = new double[n][n];
         this.distancesPoints = new double[n][n];
 
