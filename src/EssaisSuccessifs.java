@@ -43,7 +43,7 @@ public class EssaisSuccessifs {
                 this.cordes.add(c);
                 ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
                 ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
-                for (int l = k + 1; l < this.n - 1; l++){
+                for (int l = k + 1; l < j; l++){
                     ptsTriang1.remove(k + 1);
                 }
                 for (int l = i + 1; l < k; l++){
