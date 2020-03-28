@@ -9,8 +9,8 @@ public class ProblemeDynamique {
     public ArrayList<Point> points;
     public double[][] distancesPoints;
 
-    public ProblemeDynamique(int n){
-        this.points = ValtrAlgorithm.generateRandomConvexPolygon(n);
+    public ProblemeDynamique(int n, ArrayList<Point> points){
+        this.points = points;
         this.matriceProbleme = new double[n][n];
         this.distancesPoints = new double[n][n];
 

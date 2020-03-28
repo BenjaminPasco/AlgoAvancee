@@ -15,9 +15,9 @@ public class EssaisSuccessifs {
      * Simple constructeur, affiche la triangularisation minimale
      * @param n le nombre de sommets du polygone
      */
-    public EssaisSuccessifs(int n){
+    public EssaisSuccessifs(int n, ArrayList<Point> points){
         this.n = n;
-        this.points = ValtrAlgorithm.generateRandomConvexPolygon(n);
+        this.points = points;
         this.cordes = new ArrayList<Corde>();
         double result = triangulation(this.points);
         System.out.println(result);
@@ -43,7 +43,7 @@ public class EssaisSuccessifs {
                 this.cordes.add(c);
                 ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
                 ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
-                for (int l = k + 1; l < n - 1; l++){
+                for (int l = k + 1; l < this.n - 1; l++){
                     ptsTriang1.remove(k + 1);
                 }
                 for (int l = i + 1; l < k; l++){

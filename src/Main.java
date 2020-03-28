@@ -9,9 +9,9 @@ public class Main {
 
 
         int n = Integer.parseInt(/*args[0]*/ "5");
-
-        new EssaisSuccessifs(n);
-        new ProblemeDynamique(n);
+        ArrayList<Point> points = ValtrAlgorithm.generateRandomConvexPolygon(n);
+        new EssaisSuccessifs(n, points);
+        new ProblemeDynamique(n, points);
 
         //System.out.println(points.toString()+"\n");
     }
