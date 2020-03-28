@@ -87,7 +87,7 @@ public class ValtrAlgorithm {
         double minPolygonY = 0;
 
         ArrayList<Point> points = new ArrayList<>(n);
-        /*
+
         for (int i = 0; i < n; i++) {
             points.add(new Point(x, y));
 
@@ -105,12 +105,13 @@ public class ValtrAlgorithm {
         for (int i = 0; i < n; i++) {
             Point p = points.get(i);
             points.set(i, new Point((p.x + xShift) * 10, (p.y + yShift) * 10));
-        }*/
+        }
 
-        points.add(new Point(0.0,0.0));
-        points.add(new Point(0.0,1.0));
-        points.add(new Point(3.0,3.0));
-        points.add(new Point(1.0,0.0));
+        /*points.add(new Point(0.0,0.0));
+        points.add(new Point(0.0,2.0));
+        points.add(new Point(2.0,2.0));
+        points.add(new Point(2.5,1.0));
+        points.add(new Point(2.0,0.0));*/
         return points;
     }
 }

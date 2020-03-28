@@ -37,14 +37,15 @@ public class EssaisSuccessifs {
         //le resultat initial est suppose infini
         double res = MAX;
         for (int m = i; m < j; m++) {
-            for (int k = i + 2; k < j; k++) {
+            for (int k = m + 2; k < j; k++) {
                 if (valideCorde(m, k, pts)) {
                     Corde c = new Corde(pts.get(m), pts.get(k));
                     this.cordes.add(c);
                     ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
                     ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
-                    for (int l = k + 1; l < j; l++) {
-                        ptsTriang1.remove(k + 1);
+                    for (int l = k + 1; l < j + m; l++) {
+                        if (l < j) ptsTriang1.remove(k + 1);
+                        else ptsTriang1.remove(0);
                     }
                     for (int l = m + 1; l < k; l++) {
                         ptsTriang2.remove(m + 1);
@@ -73,25 +74,12 @@ public class EssaisSuccessifs {
         if (i == j) ret = false;
 
         //non valide si on a pris 2 points consécutifs
-        if(j == i + 1 || (i == 0 && j == this.n - 1)) ret = false;
+        if(j == i + 1 || (i == 0 && j == pts.size() - 1)) ret = false;
 
         for (Corde c : cordes){
             //non valide si la corde est déjà dans la liste
             if (c.getP1().equals(pts.get(i)) && c.getP2().equals(pts.get(j))) ret = false;
 
-            //non valide si la corde coupe une autre corde de la liste
-            /*if (ret)
-                ret = !(Line2D.linesIntersect(
-                        points.get(i).getX(),
-                        points.get(i).getY(),
-                        points.get(j).getX(),
-                        points.get(j).getY(),
-
-                        c.getP1().getX(),
-                        c.getP1().getY(),
-                        c.getP2().getX(),
-                        c.getP2().getY()));*/
-            if (!ret) break;
         }
         return ret;
     }
