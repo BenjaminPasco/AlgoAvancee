@@ -30,9 +30,9 @@ public class EssaisSuccessifs {
     public double triangulation(ArrayList<Point> pts){
 
         int i = 0;
-        int j = pts.size() - 1;
+        int j = pts.size();
 
-        if(j <= i+ 2) return 0;
+        if(j <= i + 3) return 0;
 
         //le resultat initial est suppose infini
         double res = MAX;
