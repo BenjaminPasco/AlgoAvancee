@@ -38,7 +38,7 @@ public class EssaisSuccessifs {
         double res = MAX;
 
         for (int k = i + 2; k < j; k++){
-            if(valideCorde(i, k)){
+            if(valideCorde(i, k, pts)){
                 Corde c = new Corde(pts.get(i), pts.get(k));
                 this.cordes.add(c);
                 ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
@@ -58,7 +58,7 @@ public class EssaisSuccessifs {
     /*
      * @return false si la corde testee est deja tracee ou si elle coupe une corde deja tracee
      */
-    public boolean valideCorde(int i, int j){
+    public boolean valideCorde(int i, int j, ArrayList<Point> pts){
         boolean ret = true;
 
         //si j < i, on inverse les valeurs
@@ -76,10 +76,10 @@ public class EssaisSuccessifs {
 
         for (Corde c : cordes){
             //non valide si la corde est déjà dans la liste
-            if (c.getP1().equals(points.get(i)) && c.getP2().equals(points.get(j))) ret = false;
+            if (c.getP1().equals(pts.get(i)) && c.getP2().equals(pts.get(j))) ret = false;
 
             //non valide si la corde coupe une autre corde de la liste
-            if (ret)
+            /*if (ret)
                 ret = !(Line2D.linesIntersect(
                         points.get(i).getX(),
                         points.get(i).getY(),
@@ -89,7 +89,7 @@ public class EssaisSuccessifs {
                         c.getP1().getX(),
                         c.getP1().getY(),
                         c.getP2().getX(),
-                        c.getP2().getY()));
+                        c.getP2().getY()));*/
             if (!ret) break;
         }
         return ret;
