@@ -36,20 +36,21 @@ public class EssaisSuccessifs {
 
         //le resultat initial est suppose infini
         double res = MAX;
-
-        for (int k = i + 2; k < j; k++){
-            if(valideCorde(i, k, pts)){
-                Corde c = new Corde(pts.get(i), pts.get(k));
-                this.cordes.add(c);
-                ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
-                ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
-                for (int l = k + 1; l < j; l++){
-                    ptsTriang1.remove(k + 1);
+        for (int m = i; m < j; m++) {
+            for (int k = i + 2; k < j; k++) {
+                if (valideCorde(m, k, pts)) {
+                    Corde c = new Corde(pts.get(m), pts.get(k));
+                    this.cordes.add(c);
+                    ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
+                    ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
+                    for (int l = k + 1; l < j; l++) {
+                        ptsTriang1.remove(k + 1);
+                    }
+                    for (int l = m + 1; l < k; l++) {
+                        ptsTriang2.remove(m + 1);
+                    }
+                    res = Math.min(res, triangulation(ptsTriang1) + triangulation(ptsTriang2) + c.getLongueur());
                 }
-                for (int l = i + 1; l < k; l++){
-                    ptsTriang2.remove(i + 1);
-                }
-                res = Math.min(res, triangulation(ptsTriang1) + triangulation(ptsTriang2) + c.getLongueur());
             }
         }
         return res;
