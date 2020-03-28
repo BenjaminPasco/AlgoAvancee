@@ -19,7 +19,7 @@ public class EssaisSuccessifs {
         this.n = n;
         this.points = ValtrAlgorithm.generateRandomConvexPolygon(n);
         this.cordes = new ArrayList<Corde>();
-        double result = triangulation(this.points,0, n-1);
+        double result = triangulation(this.points);
         System.out.println(result);
     }
 
@@ -27,7 +27,10 @@ public class EssaisSuccessifs {
      * methode recursive pour trouver la triangulation minimale
      * @return la triangularisation
      */
-    public double triangulation(ArrayList<Point> pts, int i, int j){
+    public double triangulation(ArrayList<Point> pts){
+
+        int i = 0;
+        int j = pts.size() - 1;
 
         if(j <= i+ 2) return 0;
 
@@ -38,7 +41,15 @@ public class EssaisSuccessifs {
             if(valideCorde(i, k)){
                 Corde c = new Corde(pts.get(i), pts.get(k));
                 this.cordes.add(c);
-                res = Math.min(res, triangulation(pts,i,k) + triangulation(pts,k,j) + c.getLongueur());
+                ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
+                ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
+                for (int l = k + 1; l < n - 1; l++){
+                    ptsTriang1.remove(k + 1);
+                }
+                for (int l = i + 1; l < k; l++){
+                    ptsTriang2.remove(i + 1);
+                }
+                res = Math.min(res, triangulation(ptsTriang1) + triangulation(ptsTriang2) + c.getLongueur());
             }
         }
         return res;
