@@ -10,6 +10,9 @@ public class Main {
 
         int n = Integer.parseInt(/*args[0]*/ "5");
         ArrayList<Point> points = ValtrAlgorithm.generateRandomConvexPolygon(n);
+        for (Point p : points){
+            System.out.println("point " + points.indexOf(p) + " : X = " + p.getX() + ", Y = " + p.getY());
+        }
         new EssaisSuccessifs(n, points);
         new ProblemeDynamique(n, points);
 
