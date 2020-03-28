@@ -102,7 +102,7 @@ public class ValtrAlgorithm {
 
         for (int i = 0; i < n; i++) {
             Point p = points.get(i);
-            points.set(i, new Point(p.x + xShift, p.y + yShift));
+            points.set(i, new Point((p.x + xShift) * 10, (p.y + yShift) * 10));
         }
 
         return points;
