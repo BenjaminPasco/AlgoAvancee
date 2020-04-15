@@ -60,8 +60,7 @@ public class EssaisSuccessifs {
      * @param i le premier point de la corde
      * @param j le deuxieme point de la corde
      * @param pts les points de la triangulation en cours de calcul
-     * @return false si la corde testee est deja tracee, ou si les 2 points sont identiques,
-     * ou si les 2 points sont consecutifs
+     * @return false si les 2 points sont identiques, ou si les 2 points sont consecutifs
      * les intersections entre cordes sont rendus impossibles par la conception de la methode triangulation
      */
     public boolean valideCorde(int i, int j, ArrayList<Point> pts){

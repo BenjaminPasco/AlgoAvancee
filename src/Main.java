@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int n = Integer.parseInt(/*args[0]*/ "5");
+        int n = Integer.parseInt(/*args[0]*/ "6");
         ArrayList<Point> points = ValtrAlgorithm.generateRandomConvexPolygon(n);
         for (Point p : points){
             System.out.println("(" + p.getX() + ", " + p.getY() + ")");
