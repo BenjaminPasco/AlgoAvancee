@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.awt.geom.Line2D;
 
-/*
+/**
  * Classe qui determine la triangulation minimale d'un polygome convexe par essais successifs
  */
 public class EssaisSuccessifs {
 
-    final double MAX = 100000000;
+    final double MAX = 100000000;       //longueur d'une corde impossible a atteindre
     private int n;                      //le nombre de sommets du polygone
     private ArrayList<Point> points;    //la liste des points du polygone, generee au debut
     private ArrayList<Corde> cordes;    //la liste des cordes, remplie au cours de l'algorithme
+    private double result;
 
-    /*
+    /**
      * Simple constructeur, affiche la triangularisation minimale
      * @param n le nombre de sommets du polygone
      * @param points la liste des points du polynome
@@ -20,11 +21,10 @@ public class EssaisSuccessifs {
         this.n = n;
         this.points = points;
         this.cordes = new ArrayList<Corde>();
-        double result = triangulation(this.points);
-        System.out.println(result);
+        this.result = triangulation(this.points);
     }
 
-    /*
+    /**
      * methode recursive pour trouver la triangulation minimale
      * @param pts les points de la triangulation a calculer
      * @return la triangulation
@@ -37,7 +37,7 @@ public class EssaisSuccessifs {
         if(j <= i + 3) return 0;
 
         //le resultat initial est suppose infini
-        double res = MAX;
+        double res = this.MAX;
         for (int m = i; m < j; m++) {
             for (int k = m + 2; k < j; k++) {
                 if (valideCorde(m, k, pts)) {
@@ -59,7 +59,7 @@ public class EssaisSuccessifs {
         return res;
     }
 
-    /*
+    /**
      * @param i le premier point de la corde
      * @param j le deuxieme point de la corde
      * @param pts les points de la triangulation en cours de calcul
@@ -88,5 +88,12 @@ public class EssaisSuccessifs {
 
         }
         return ret;
+    }
+
+    /**
+     * @return le resultat de la triangulation minimale
+     */
+    public double getResult(){
+        return this.result;
     }
 }

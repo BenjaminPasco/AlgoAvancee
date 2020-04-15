@@ -1,3 +1,6 @@
+/**
+ * Classe qui modelise un point de 2 coordonnees
+ */
 public class Point {
     Double x;
     Double y;

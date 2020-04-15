@@ -13,10 +13,13 @@ public class Main {
         for (Point p : points){
             System.out.println("point " + points.indexOf(p) + " : X = " + p.getX() + ", Y = " + p.getY());
         }
-        new EssaisSuccessifs(n, points);
-        new ProblemeDynamique(n, points);
-        new Glouton(n, points);
 
-        //System.out.println(points.toString()+"\n");
+        EssaisSuccessifs e = new EssaisSuccessifs(n, points);
+        System.out.println(e.getResult());
+
+        new ProblemeDynamique(n, points);
+
+        Glouton g = new Glouton(n, points);
+        System.out.println(g.getResult());
     }
 }

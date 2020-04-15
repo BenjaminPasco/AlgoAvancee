@@ -1,3 +1,6 @@
+/**
+ * Classe qui modelise une corde de 2 points, possibilite de retourner sa longueur
+ */
 public class Corde {
 
     private Point p1;
