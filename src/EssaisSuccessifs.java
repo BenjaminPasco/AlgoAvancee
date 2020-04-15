@@ -2,18 +2,19 @@ import java.util.ArrayList;
 import java.awt.geom.Line2D;
 
 /*
- * Classe qui determine la triangulation d'un polygome convexe par essais successifs
+ * Classe qui determine la triangulation minimale d'un polygome convexe par essais successifs
  */
 public class EssaisSuccessifs {
 
     final double MAX = 100000000;
-    private int n;
+    private int n;                      //le nombre de sommets du polygone
     private ArrayList<Point> points;    //la liste des points du polygone, generee au debut
     private ArrayList<Corde> cordes;    //la liste des cordes, remplie au cours de l'algorithme
 
     /*
      * Simple constructeur, affiche la triangularisation minimale
      * @param n le nombre de sommets du polygone
+     * @param points la liste des points du polynome
      */
     public EssaisSuccessifs(int n, ArrayList<Point> points){
         this.n = n;
@@ -25,7 +26,8 @@ public class EssaisSuccessifs {
 
     /*
      * methode recursive pour trouver la triangulation minimale
-     * @return la triangularisation
+     * @param pts les points de la triangulation a calculer
+     * @return la triangulation
      */
     public double triangulation(ArrayList<Point> pts){
 
@@ -58,11 +60,15 @@ public class EssaisSuccessifs {
     }
 
     /*
-     * @return false si la corde testee est deja tracee ou si elle coupe une corde deja tracee
+     * @param i le premier point de la corde
+     * @param j le deuxieme point de la corde
+     * @param pts les points de la triangulation en cours de calcul
+     * @return false si la corde testee est deja tracee, ou si les 2 points sont identiques,
+     * ou si les 2 points sont consecutifs
+     * les intersections entre cordes sont rendus impossibles par la conception de la methode triangulation
      */
     public boolean valideCorde(int i, int j, ArrayList<Point> pts){
         boolean ret = true;
-
         //si j < i, on inverse les valeurs
         if (j < i){
             int k = j;

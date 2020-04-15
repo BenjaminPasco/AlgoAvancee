@@ -15,6 +15,7 @@ public class Main {
         }
         new EssaisSuccessifs(n, points);
         new ProblemeDynamique(n, points);
+        new Glouton(n, points);
 
         //System.out.println(points.toString()+"\n");
     }
