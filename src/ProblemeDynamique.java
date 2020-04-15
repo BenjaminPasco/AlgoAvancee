@@ -4,7 +4,7 @@ import java.math.*;
 
 public class ProblemeDynamique {
 
-    int n;
+    public int n;
     public double[][] matriceProbleme;
     public ArrayList<Point> points;
     public double[][] distancesPoints;
@@ -18,17 +18,12 @@ public class ProblemeDynamique {
             for(int j = 0; j<n;j++ ){
                 matriceProbleme[i][j]=-1;
                 distancesPoints[i][j]=-1;
-            }
-
-            distancesPoints[i][i]= 0.0;
-            if (i > 1) {
-                distancesPoints[i][i-1]=0.0;
-            }
-            if (i< this.n-1){
-                distancesPoints[i][i+1]=0.0;
+                if(Math.abs(i-j) <= 1){
+                    distancesPoints[i][j]=0;
+                }
             }
         }
-
+        matriceToString(distancesPoints);
         double result = triangularisation(0, n-1);
         System.out.println(result);
     }
@@ -89,29 +84,39 @@ public class ProblemeDynamique {
         int t = finSetPoints;
         Double poidMin = 0.0;
 
-        if(this.matriceProbleme[i][t]==-1){
-
-            for(int k = 1; k< t-1; k++){
-                double distanceCorde = calculPoid(i, i+k, i+t-1);
-                double triang1 = triangularisation(i,k+1);
-                double triang2 = triangularisation(i+k,t-k);
-
-                double poid = distanceCorde + triang1 + triang2;
-                if(k==1){
-                    poidMin = poid;
-                } else {
-                    if(poid < poidMin){
+        if(this.matriceProbleme[i][t]!=-1){
+            return this.matriceProbleme[i][t];
+        }
+        else{
+            System.out.println("triangularisation:"+debutSetPoints+","+finSetPoints);
+            //matriceToString(matriceProbleme);
+            if(t == i+2){
+                this.matriceProbleme[i][t] = 0;
+                return this.matriceProbleme[i][t];
+            }
+            else{
+                for(int k = i+2 ; k < t; k++){
+                    double poid = triangularisation(i,k) + triangularisation(k,i) + distancesPoints[i][k];
+                    if(k == i+2){
                         poidMin = poid;
-                    } else {
-
+                    }else{
+                        poidMin = Math.min(poid, poidMin);
                     }
                 }
+                matriceProbleme[i][t]= poidMin;
+                return this.matriceProbleme[i][t];
             }
-            matriceProbleme[i][t]=poidMin;
-            return poidMin;
-        }else{
-            return matriceProbleme[i][t];
         }
     }
 
+    public void matriceToString(double[][] matrice){
+        String chaine = "|";
+        for(int i=0;i< matrice.length;i++){
+            for( int j=0;j<matrice.length;j++){
+                chaine = chaine +" "+ matrice[i][j]+ " |";
+            }
+            chaine = chaine +"\n";
+        }
+        System.out.println(chaine);
+    }
 }
