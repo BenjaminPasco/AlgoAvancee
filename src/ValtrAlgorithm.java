@@ -107,11 +107,6 @@ public class ValtrAlgorithm {
             points.set(i, new Point((p.x + xShift) * 10, (p.y + yShift) * 10));
         }
 
-        /*points.add(new Point(0.0,0.0));
-        points.add(new Point(0.0,2.0));
-        points.add(new Point(2.0,2.0));
-        points.add(new Point(2.5,1.0));
-        points.add(new Point(2.0,0.0));*/
         return points;
     }
 }
