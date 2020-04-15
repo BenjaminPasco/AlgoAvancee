@@ -15,11 +15,12 @@ public class Main {
         }
 
         EssaisSuccessifs e = new EssaisSuccessifs(n, points);
-        System.out.println(e.getResult());
+        System.out.println("Resultat essais successifs :" + e.getResult());
 
-        new ProblemeDynamique(n, points);
+        ProblemeDynamique p = new ProblemeDynamique(n, points);
+        System.out.println("Resultat probleme dynamique :" + p.getResult());
 
         Glouton g = new Glouton(n, points);
-        System.out.println(g.getResult());
+        System.out.println("Resultat glouton :" + g.getResult());
     }
 }

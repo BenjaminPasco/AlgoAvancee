@@ -4,10 +4,11 @@ import java.math.*;
 
 public class ProblemeDynamique {
 
-    public int n;
-    public double[][] matriceProbleme;
-    public ArrayList<Point> points;
-    public double[][] distancesPoints;
+    private int n;
+    private double[][] matriceProbleme;
+    private ArrayList<Point> points;
+    private double[][] distancesPoints;
+    private double result;
 
     public ProblemeDynamique(int n, ArrayList<Point> points){
         this.points = points;
@@ -118,5 +119,9 @@ public class ProblemeDynamique {
             chaine = chaine +"\n";
         }
         System.out.println(chaine);
+    }
+
+    public double getResult(){
+        return this.result;
     }
 }
