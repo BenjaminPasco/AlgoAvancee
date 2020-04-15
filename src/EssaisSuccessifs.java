@@ -9,7 +9,6 @@ public class EssaisSuccessifs {
     final double MAX = 100000000;       //longueur d'une corde impossible a atteindre
     private int n;                      //le nombre de sommets du polygone
     private ArrayList<Point> points;    //la liste des points du polygone, generee au debut
-    private ArrayList<Corde> cordes;    //la liste des cordes, remplie au cours de l'algorithme
     private double result;
 
     /**
@@ -20,7 +19,6 @@ public class EssaisSuccessifs {
     public EssaisSuccessifs(int n, ArrayList<Point> points){
         this.n = n;
         this.points = points;
-        this.cordes = new ArrayList<Corde>();
         this.result = triangulation(this.points);
     }
 
@@ -42,7 +40,6 @@ public class EssaisSuccessifs {
             for (int k = m + 2; k < j; k++) {
                 if (valideCorde(m, k, pts)) {
                     Corde c = new Corde(pts.get(m), pts.get(k));
-                    this.cordes.add(c);
                     ArrayList<Point> ptsTriang1 = new ArrayList<Point>(pts);
                     ArrayList<Point> ptsTriang2 = new ArrayList<Point>(pts);
                     for (int l = k + 1; l < j + m; l++) {
@@ -82,11 +79,6 @@ public class EssaisSuccessifs {
         //non valide si on a pris 2 points consécutifs
         if(j == i + 1 || (i == 0 && j == pts.size() - 1)) ret = false;
 
-        for (Corde c : cordes){
-            //non valide si la corde est déjà dans la liste
-            if (c.getP1().equals(pts.get(i)) && c.getP2().equals(pts.get(j))) ret = false;
-
-        }
         return ret;
     }
 
