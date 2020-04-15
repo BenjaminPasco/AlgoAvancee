@@ -30,34 +30,36 @@ public class Glouton {
         int nRestant = 0;
         ArrayList<Integer> indexUtilises = new ArrayList<Integer>();
         boolean plusDeCordeExt = false;
+        double[] tabValCordesExt = new double[this.n];
+
+        for (int m = 0; m < this.n; m++) {
+                Corde c = null;
+                if (m + 2 < this.n) c = new Corde(this.points.get(m), this.points.get(m + 2));
+                else if (m + 2 == this.n) c = new Corde(this.points.get(m), this.points.get(0));
+                else c = new Corde(this.points.get(m), this.points.get(1));
+                tabValCordesExt[m] = c.getLongueur();
+        }
+
         while(!plusDeCordeExt) {
-            int cptIndexPossibles = 0;
-            double[] tabValCordesExt = new double[this.n];
-            for (int m = 0; m < this.n; m++) {
-                boolean indexDejaUtilise = false;
-                for (Integer i : indexUtilises) {
-                    if (m == i || m == i + 1) indexDejaUtilise = true;
-                    if (m == 0 && i == this.n - 1) indexDejaUtilise = true;
-                }
-                if (!indexDejaUtilise) {
-                    Corde c = null;
-                    if (m + 2 < this.n) c = new Corde(this.points.get(m), this.points.get(m + 2));
-                    else if (m + 2 == this.n) c = new Corde(this.points.get(m), this.points.get(0));
-                    else c = new Corde(this.points.get(m), this.points.get(1));
-                    tabValCordesExt[m] = c.getLongueur();
-                    cptIndexPossibles++;
-                }
-            }
-            if (cptIndexPossibles == 0) plusDeCordeExt = true;
             double valCordeMini = this.MAX;
             int indexMini = 0;
             for (int i = 0; i < this.n; i++) {
                 valCordeMini = Math.min(valCordeMini, tabValCordesExt[i]);
                 if (valCordeMini == tabValCordesExt[i]) indexMini = i;
             }
-            indexUtilises.add(indexMini);
-            res = res + valCordeMini;
+            tabValCordesExt[indexMini] = this.MAX;
+            if(indexMini == this.n - 1) tabValCordesExt[0] = this.MAX;
+            else tabValCordesExt[indexMini + 1] = this.MAX;
+            if(indexMini == 0) tabValCordesExt[n - 1] = this.MAX;
+            else tabValCordesExt[indexMini - 1] = this.MAX;
+
+            if (valCordeMini != this.MAX) {
+                indexUtilises.add(indexMini);
+                res = res + valCordeMini;
+            }
+            else plusDeCordeExt = true;
         }
+
         nRestant = n - indexUtilises.size();
         ArrayList<Point> ptsRestants = new ArrayList<Point>(this.points);
         for (Integer i : indexUtilises){
