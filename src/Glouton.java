@@ -52,6 +52,10 @@ public class Glouton {
             else tabValCordesExt[indexMini + 1] = this.MAX;
             if(indexMini == 0) tabValCordesExt[n - 1] = this.MAX;
             else tabValCordesExt[indexMini - 1] = this.MAX;
+            if (this.n == 4){
+                if (indexMini < 2)tabValCordesExt[indexMini + 2] = this.MAX;
+                else tabValCordesExt[indexMini - 2] = this.MAX;
+            }
 
             if (valCordeMini != this.MAX) {
                 indexUtilises.add(indexMini);
@@ -63,12 +67,13 @@ public class Glouton {
         nRestant = n - indexUtilises.size();
         ArrayList<Point> ptsRestants = new ArrayList<Point>(this.points);
         for (Integer i : indexUtilises){
-            if (i == this.n - 1) ptsRestants.remove(0);
-            else ptsRestants.remove(i + 1);
+            if (i == this.n - 1) ptsRestants.remove(points.get(0));
+            else ptsRestants.remove(points.get(i + 1));
         }
 
         //On determine le reste des cordes par la strategie des essais sucessifs
         EssaisSuccessifs e = new EssaisSuccessifs(nRestant, ptsRestants);
+
         return res + e.getResult();
     }
 
